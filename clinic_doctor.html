@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f8f9fc;
+        }
+
+        header {
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            padding: 20px 50px;
+            background: #007BFF;
+            color: white;
+            position: relative;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        nav ul li a.active {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .requests-btn {
+            display: inline-flex;
+            align-items: center;
+            background: #28a745;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .requests-btn:hover {
+            background: #218838;
+        }
+
+        .counter {
+            background: red;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="../tests/tests_doctor">Tests</a></li>
+                <li><a href="../tips/tips_doctor.html">Tips</a></li>
+                <li><a href="../requests/clinic_doctor.html">Clinic</a></li>
+                <li><a href="../about_us/about_doctor.html">About us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Welcome, Doctor!</h2>
+        <p>Manage your patient requests efficiently.</p>
+        <button class="requests-btn" onclick="goToRequests()">
+            Requests <span class="counter" id="requestCounter">0</span>
+        </button>
+    </div>
+
+    <script>
+        let requestCount = 0;
+
+        function goToRequests() {
+            window.location.href = "requests.html";
+        }
+
+        function addRequest() {
+            requestCount++;
+            document.getElementById("requestCounter").innerText = requestCount;
+        }
+
+        // Simulating new request every 5 seconds (for demo purposes)
+        setInterval(addRequest, 5000);
+    </script>
+</body>
+</html>

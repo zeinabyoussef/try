@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Patient Sign Up</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="container">
+    <h2>Patient Sign Up</h2>
+    <form id="patient-form">
+      <input type="text" id="patient-name" placeholder="Full Name" required />
+      <input type="email" id="patient-email" placeholder="Email" required />
+      <input type="password" id="patient-password" placeholder="Password" required />
+      <button type="submit" class="btn">Sign Up</button>
+    </form>
+
+    <p class="already">Already signed up? <a href="login.html">Login</a></p>
+  </div>
+
+  <!-- <script>
+    document.getElementById("patient-form").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const name = document.getElementById("patient-name").value;
+      const email = document.getElementById("patient-email").value;
+      const password = document.getElementById("patient-password").value;
+
+      if (localStorage.getItem(email)) {
+        alert("This email is already registered!");
+      } else {
+        // تخزين بيانات تسجيل الدخول
+        localStorage.setItem(email, JSON.stringify({ role: "patient", password }));
+
+        // ✅ تخزين بيانات المريض للوصول لها لاحقًا
+        localStorage.setItem("patientName", name);
+        localStorage.setItem("patientEmail", email);
+
+        alert("Patient registered successfully!");
+        window.location.href = "home-patient.html";
+      }
+    });
+  </script>
+
+  <script src="script.js"></script> -->
+  <script src="script.js"></script>
+</body>
+</html>

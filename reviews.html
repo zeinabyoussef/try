@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>View Reviews</title>
+  <style>
+    /* يمكن نقل هذه الأنماط لملف CSS منفصل */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar {
+      background-color: #007bff;
+      padding: 15px;
+      text-align: center;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 15px;
+      font-size: 18px;
+    }
+    .review-container {
+      width: 80%;
+      max-width: 800px;
+      margin: 30px auto;
+    }
+    .review-form {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    .rating-stars {
+      margin: 10px 0;
+    }
+    .star {
+      font-size: 24px;
+      color: #ccc;
+      cursor: pointer;
+    }
+    .star.selected {
+      color: #ffc107;
+    }
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      resize: vertical;
+      min-height: 100px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .review-item {
+      background: white;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .review-author {
+      font-weight: bold;
+      color: #007bff;
+    }
+    .review-date {
+      color: #777;
+      font-size: 14px;
+    }
+    .review-rating {
+      color: #ffc107;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="../home_pages/home-patient.html">Home</a>
+    <a href="../tests/tests.html">Tests</a>
+    <a href="../tips/tips.html">Tips</a>
+    <a href="../clinics/clinics.html">Clinics</a>
+    <a href="../about_us/about_patient.html">About Us</a>
+  </nav>
+
+  <div class="review-container">
+    <div class="review-form">
+      <h2>Leave a Review</h2>
+      <div class="rating-stars">
+        <span class="star" data-rating="1">★</span>
+        <span class="star" data-rating="2">★</span>
+        <span class="star" data-rating="3">★</span>
+        <span class="star" data-rating="4">★</span>
+        <span class="star" data-rating="5">★</span>
+      </div>
+      <textarea id="review-text" placeholder="Share your experience..."></textarea>
+      <button id="submit-review">Submit Review</button>
+    </div>
+
+    <div id="reviews-list">
+      <!-- Reviews will be loaded here -->
+    </div>
+  </div>
+
+  <script>
+    // Get clinic and doctor from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const clinicName = urlParams.get('clinic');
+    const doctorName = urlParams.get('doctor');
+    
+    // Rating system
+    const stars = document.querySelectorAll('.star');
+    let selectedRating = 0;
+    
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        const rating = parseInt(star.getAttribute('data-rating'));
+        selectedRating = rating;
+        
+        stars.forEach((s, index) => {
+          if (index < rating) {
+            s.classList.add('selected');
+          } else {
+            s.classList.remove('selected');
+          }
+        });
+      });
+    });
+    
+    // Submit review
+    document.getElementById('submit-review').addEventListener('click', () => {
+      const reviewText = document.getElementById('review-text').value.trim();
+      const loggedInUser = localStorage.getItem('loggedInUser') || 'Anonymous';
+      
+      if (selectedRating === 0) {
+        alert('Please select a rating');
+        return;
+      }
+      
+      if (reviewText === '') {
+        alert('Please write a review');
+        return;
+      }
+      
+      // Save review to localStorage
+      const reviewKey = `reviews_${clinicName}_${doctorName}`;
+      const reviews = JSON.parse(localStorage.getItem(reviewKey)) || [];
+      
+      const newReview = {
+        user: loggedInUser,
+        rating: selectedRating,
+        text: reviewText,
+        date: new Date().toLocaleDateString()
+      };
+      
+      reviews.push(newReview);
+      localStorage.setItem(reviewKey, JSON.stringify(reviews));
+      
+      // Clear form
+      document.getElementById('review-text').value = '';
+      stars.forEach(star => star.classList.remove('selected'));
+      selectedRating = 0;
+      
+      // Reload reviews
+      loadReviews();
+    });
+    
+    // Load reviews
+    function loadReviews() {
+      const reviewKey = `reviews_${clinicName}_${doctorName}`;
+      const reviews = JSON.parse(localStorage.getItem(reviewKey)) || [];
+      const reviewsList = document.getElementById('reviews-list');
+      
+      reviewsList.innerHTML = '';
+      
+      if (reviews.length === 0) {
+        reviewsList.innerHTML = '<p>No reviews yet. Be the first to review!</p>';
+        return;
+      }
+      
+      reviews.forEach(review => {
+        const reviewItem = document.createElement('div');
+        reviewItem.className = 'review-item';
+        
+        const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+        
+        reviewItem.innerHTML = `
+          <div class="review-header">
+            <span class="review-author">${review.user}</span>
+            <span class="review-date">${review.date}</span>
+          </div>
+          <div class="review-rating">${stars}</div>
+          <p>${review.text}</p>
+        `;
+        
+        reviewsList.appendChild(reviewItem);
+      });
+    }
+    
+    // Load reviews on page load
+    loadReviews();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Data Form</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 50px;
+            background: #007BFF;
+            color: white;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        nav ul li {
+            margin: 0 20px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: 600;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="../home_pages/home_doctor.html" >Home</a></li>
+            <li><a href="../tests/tests_doctor.html">Tests</a></li>
+            <li><a href="../tips/tips_doctor.html">Tips</a></li>
+            <li><a href="../requests/clinic_doctor.html">Clinic</a></li>
+            <li><a href="../about_us/about_doctor.html">About us</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h2>Heart Disease Data Form</h2>
+        <form>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>General Health</label>
+                    <select>
+                        <option value="Very Good">Very Good</option>
+                        <option value="Good">Good</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Last Checkup</label>
+                    <select>
+                        <option value="Within 1 year">Within the past year</option>
+                        <option value="Within 2 years">Within the past 2 years</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Physical Activity</label>
+                    <select>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Heart Disease</label>
+                    <select>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Skin Cancer</label>
+                    <select>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Other Cancer</label>
+                    <select>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Depression</label>
+                    <select>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Diabetes</label>
+                    <select>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Arthritis</label>
+                    <select>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Age Category</label>
+                    <select>
+                        <option value="65-69">65-69</option>
+                        <option value="60-64">60-64</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Height (cm)</label>
+                    <input type="number" placeholder="Enter height">
+                </div>
+                <div class="form-group">
+                    <label>Weight (kg)</label>
+                    <input type="number" placeholder="Enter weight">
+                </div>
+                <div class="form-group">
+                    <label>BMI</label>
+                    <input type="number" placeholder="Enter BMI">
+                </div>
+                <div class="form-group">
+                    <label>Smoking History</label>
+                    <select>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Alcohol Consumption</label>
+                    <input type="number" min="0" max="30" placeholder="Enter days">
+                </div>
+                <div class="form-group">
+                    <label>Fruit Consumption</label>
+                    <input type="number" min="0" max="120" placeholder="Enter value">
+                </div>
+                <div class="form-group">
+                    <label>Green Vegetables Consumption</label>
+                    <input type="number" min="0" max="128" placeholder="Enter value">
+                </div>
+                <div class="form-group">
+                    <label>Fried Potato Consumption</label>
+                    <input type="number" min="0" max="128" placeholder="Enter value">
+                </div>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

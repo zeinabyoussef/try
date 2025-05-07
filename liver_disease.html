@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Liver Disease Clinics</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #007BFF;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 500;
+      transition: opacity 0.3s;
+    }
+
+    .navbar a:hover {
+      opacity: 0.8;
+    }
+
+    /* Title */
+    h1 {
+      text-align: center;
+      margin: 40px 0 20px;
+      color: #007BFF;
+      font-size: 32px;
+    }
+
+    /* Container */
+    .clinics-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 10px 50px;
+    }
+
+    /* Card */
+    .clinic-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .clinic-card img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .clinic-details {
+      margin-left: 20px;
+      flex: 1;
+    }
+
+    .clinic-details h3 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      color: #333;
+    }
+
+    .clinic-details p {
+      margin: 5px 0;
+      font-size: 15px;
+      color: #555;
+    }
+
+    .clinic-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .clinic-buttons button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .request-btn {
+      background-color: #17c9d7;
+      color: white;
+    }
+
+    .request-btn:hover {
+      background-color: #14b1bd;
+    }
+
+    .review-btn {
+      background-color: #007BFF;
+      color: white;
+    }
+
+    .review-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<div class="navbar">
+  <a href="../home_pages/home-patient.html" class="active">Home</a>
+  <a href="tests.html">Tests</a>
+  <a href="tips.html">Tips</a>
+  <a href="../clinics/clinics.html">Clinics</a>
+  <a href="../about_us/about_patient.html">About Us</a>
+</div>
+
+<!-- Page Title -->
+<h1>Liver Disease Clinics</h1>
+
+<!-- Clinics Container -->
+<div class="clinics-container" id="clinicsList"></div>
+
+<script>
+  function loadClinics() {
+    let key = "liver_disease";
+    let clinics = JSON.parse(localStorage.getItem(key)) || [];
+    let container = document.getElementById("clinicsList");
+
+    container.innerHTML = "";
+
+    clinics.forEach(clinic => {
+      let card = document.createElement("div");
+      card.className = "clinic-card";
+
+      card.innerHTML = `
+        <img src="${clinic.image || 'default.png'}" alt="Doctor Image" />
+        <div class="clinic-details">
+          <h3>${clinic.name}</h3>
+          <p><strong>Doctor:</strong> ${clinic.doctor}</p>
+          <div class="clinic-buttons">
+            <button class="request-btn">Request to Join</button>
+            <button class="review-btn">View Reviews</button>
+          </div>
+        </div>
+      `;
+
+      const reviewBtn = card.querySelector(".review-btn");
+      reviewBtn.addEventListener("click", () => {
+        const clinicNameEncoded = encodeURIComponent(clinic.name);
+        const doctorNameEncoded = encodeURIComponent(clinic.doctor);
+        window.location.href = `../clinics/reviews.html?clinic=${clinicNameEncoded}&doctor=${doctorNameEncoded}`;
+      });
+
+      container.appendChild(card);
+    });
+  }
+
+  window.onload = loadClinics;
+</script>
+
+</body>
+</html>

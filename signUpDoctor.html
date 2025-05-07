@@ -1,0 +1,55 @@
+<!-- register.html -->
+<form id="doctorRegisterForm">
+    <input type="text" id="fullName" placeholder="الاسم بالكامل" required>
+    <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+    <input type="password" id="password" placeholder="كلمة المرور" required>
+    <select id="specialty" required>
+        <option value="">اختر التخصص</option>
+        <option value="أمراض القلب">أمراض القلب</option>
+        <option value="السكري">السكري</option>
+    </select>
+    <input type="file" id="profileImage" accept="image/*">
+    <button type="submit">تسجيل</button>
+</form>
+
+<script>
+    document.getElementById('doctorRegisterForm').onsubmit = function(e) {
+        e.preventDefault();
+        
+        // 1. جمع بيانات التسجيل
+        const doctorData = {
+            fullName: document.getElementById('fullName').value,
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value,
+            specialty: document.getElementById('specialty').value,
+            profileImage: ''
+        };
+        
+        // 2. معالجة صورة البروفايل (إذا تم رفعها)
+        const imageFile = document.getElementById('profileImage').files[0];
+        if (imageFile) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                doctorData.profileImage = e.target.result;
+                completeRegistration(doctorData);
+            };
+            reader.readAsDataURL(imageFile);
+        } else {
+            completeRegistration(doctorData);
+        }
+    };
+    
+    function completeRegistration(doctorData) {
+        // 3. حفظ بيانات الطبيب
+        const allDoctors = JSON.parse(localStorage.getItem('registeredDoctors')) || [];
+        allDoctors.push(doctorData);
+        localStorage.setItem('registeredDoctors', JSON.stringify(allDoctors));
+        
+        // 4. تسجيل الدخول تلقائياً
+        localStorage.setItem('currentDoctorEmail', doctorData.email);
+        localStorage.setItem('userType', 'doctor');
+        
+        // 5. التوجيه للوحة التحكم
+        window.location.href = 'clinic_doctor.html';
+    }
+</script>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Home</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f8f9fc;
+        }
+
+        
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 50px;
+            background: #007BFF;
+            color: white;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        nav ul li a.active {
+            text-decoration: underline;
+        }
+
+        
+        .doctor-home {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 100px 50px;
+            position: relative;
+        }
+
+        .content {
+            max-width: 500px;
+            z-index: 1;
+        }
+
+        h3 {
+            color: #007BFF;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
+        .highlight {
+            color: #007BFF;
+        }
+
+        p {
+            font-size: 14px;
+            color: #666;
+            margin: 15px 0;
+        }
+
+        
+        #createClinicBtn {
+            background: #007BFF;
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        #createClinicBtn:hover {
+            background-color: #0056b3;
+        }
+
+        
+        .doctor-image img {
+            width: 500px;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0px 15px 30px rgba(47, 120, 231, 0.908));
+            transform: translateX(-100px);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            width: 40%;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 25px;
+            cursor: pointer;
+            color: rgb(25, 0, 255);
+            font-weight: bold;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            text-align: left;
+        }
+
+        input, select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="../tests/tests_doctor.html">Tests</a></li>
+                <li><a href="../tips/tips_doctor.html">Tips</a></li>
+                <li><a href="../requests/clinic_doctor.html">Clinic</a></li>
+                <li><a href="../about_us/about_doctor.html">About us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="doctor-home">
+        <div class="content">
+            <h3>Welcome to your health care destination!</h3>
+            <h1>Your <span class="highlight">Health</span>, Our Priority<br>
+                Expert <span class="highlight">Care</span> You Can Trust</h1>
+            <p>Get the care you need with our doctors and staff.<br>
+                We’re here to help you feel better and stay healthy.<br>
+                Learn about our services and reach out to us anytime!</p>
+            
+            <button id="createClinicBtn">Create Clinic</button>
+        </div>
+        <div class="doctor-image">
+            <img src="../home_pages/doctor_home.png" alt="Doctor">
+        </div>
+    </section>
+
+
+    <div id="clinicModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Create Your Clinic</h2>
+            <form id="clinicForm">
+                <label for="clinicName">Clinic Name:</label>
+                <input type="text" id="clinicName" required>
+
+                <label for="specialty">Specialty:</label>
+                <select id="specialty">
+                    <option value="heart_disease">Heart Disease</option>
+                    <option value="lung_disease">Lung Disease</option>
+                    <option value="lung_cancer">Lung Cancer</option>
+                    <option value="diabetes">Diabetes</option>
+                    <option value="breast_cancer">Breast Cancer</option>
+                    <option value="liver_cancer">Liver Cancer</option>
+                    <option value="liver_disease">Liver Disease</option>
+                    
+                </select>
+
+                <label for="doctorName">Doctor's Name:</label>
+                <input type="text" id="doctorName" required>
+
+                <label for="doctorImage">Upload Image:</label>
+                <input type="file" id="doctorImage">
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        
+
+
+
+    
+//     let modal = document.getElementById("clinicModal");
+//     let btn = document.getElementById("createClinicBtn");
+//     let close = document.querySelector(".close");
+//     let form = document.getElementById("clinicForm");
+
+//     btn.onclick = function () {
+//         modal.style.display = "flex";
+//     };
+
+//     close.onclick = function () {
+//         modal.style.display = "none";
+//     };
+
+//     window.onclick = function (event) {
+//         if (event.target === modal) {
+//             modal.style.display = "none";
+//         }
+//     };
+
+//     form.onsubmit = function (event) {
+//         event.preventDefault();
+
+//         let clinicName = document.getElementById("clinicName").value;
+//         let specialty = document.getElementById("specialty").value;
+//         let doctorName = document.getElementById("doctorName").value;
+//         let doctorImage = document.getElementById("doctorImage").files[0];
+
+//         let reader = new FileReader();
+//         reader.onload = function (e) {
+//             let clinic = {
+//                 name: clinicName,
+//                 specialty: specialty,
+//                 doctor: doctorName,
+//                 image: e.target.result // حفظ الصورة كـ Base64
+//             };
+
+//             // التأكد من تخزين العيادات تحت اسم المرض الصحيح
+//             let diseaseKey = specialty.toLowerCase().replace(" ", "_");
+//             let clinics = JSON.parse(localStorage.getItem(diseaseKey)) || [];
+//             clinics.push(clinic);
+//             localStorage.setItem(diseaseKey, JSON.stringify(clinics));
+
+//             alert("Clinic Created Successfully!");
+
+//             modal.style.display = "none";
+//             form.reset();
+
+//             // توجيه الطبيب مباشرة إلى صفحة المرض
+//             window.location.href = diseaseKey + ".html";
+//         };
+
+//         // if (doctorImage) {
+//         //     reader.readAsDataURL(doctorImage);
+//         // } else {
+//         //     reader.onload();
+//         // }
+//         if (doctorImage) {
+//     reader.readAsDataURL(doctorImage);
+// } else {
+//     // لما مفيش صورة، احفظ العيادة مباشرة بدون صورة
+//     let clinic = {
+//         name: clinicName,
+//         specialty: specialty,
+//         doctor: doctorName,
+//         image: null
+//     };
+
+//     let diseaseKey = specialty.toLowerCase().replace(" ", "_");
+//     let clinics = JSON.parse(localStorage.getItem(diseaseKey)) || [];
+//     clinics.push(clinic);
+//     localStorage.setItem(diseaseKey, JSON.stringify(clinics));
+
+//     alert("Clinic Created Successfully!");
+//     modal.style.display = "none";
+//     form.reset();
+//     window.location.href = diseaseKey + ".html";
+// }
+
+//     };
+
+
+
+window.onload = function () {
+    let modal = document.getElementById("clinicModal");
+    let btn = document.getElementById("createClinicBtn");
+    let close = document.querySelector(".close");
+    let form = document.getElementById("clinicForm");
+
+    btn.onclick = function () {
+        console.log("Button clicked");
+        modal.style.display = "flex";
+    };
+
+    close.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+
+    form.onsubmit = function (event) {
+        event.preventDefault();
+
+        let clinicName = document.getElementById("clinicName").value;
+        let specialty = document.getElementById("specialty").value;
+        let doctorName = document.getElementById("doctorName").value;
+        let doctorImage = document.getElementById("doctorImage").files[0];
+
+        let diseaseKey = specialty.toLowerCase().replace(" ", "_");
+
+        if (doctorImage) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                let clinic = {
+                    name: clinicName,
+                    specialty: specialty,
+                    doctor: doctorName,
+                    image: e.target.result
+                };
+
+                let clinics = JSON.parse(localStorage.getItem(diseaseKey)) || [];
+                clinics.push(clinic);
+                localStorage.setItem(diseaseKey, JSON.stringify(clinics));
+
+                alert("Clinic Created Successfully!");
+                modal.style.display = "none";
+                form.reset();
+                window.location.href = diseaseKey + ".html";
+            };
+            reader.readAsDataURL(doctorImage);
+        } else {
+            // ✅ في حالة عدم رفع صورة، استخدم صورة افتراضية
+            let clinic = {
+                name: clinicName,
+                specialty: specialty,
+                doctor: doctorName,
+                image: "default.png" // ← تأكدي إن الصورة موجودة في هذا المسار
+            };
+
+            let clinics = JSON.parse(localStorage.getItem(diseaseKey)) || [];
+            clinics.push(clinic);
+            localStorage.setItem(diseaseKey, JSON.stringify(clinics));
+
+            alert("Clinic Created Successfully!");
+            modal.style.display = "none";
+            form.reset();
+            window.location.href = diseaseKey + ".html";
+        }
+    };
+};
+
+
+</script>
+
+   
+</body>
+</html>

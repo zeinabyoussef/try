@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Requests Page</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+
+    .navbar {
+      background-color: #007BFF;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 500;
+      transition: opacity 0.3s;
+    }
+
+    .navbar a:hover {
+      opacity: 0.8;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 40px 0 20px;
+      color: #007BFF;
+    }
+
+    .requests-container {
+      max-width: 800px;
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    .request-card {
+      background: white;
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .request-card h3 {
+      margin: 0 0 10px;
+      color: #333;
+    }
+
+    .request-card p {
+      margin: 5px 0;
+      color: #555;
+    }
+
+    .actions {
+      margin-top: 10px;
+    }
+
+    .actions button {
+      padding: 7px 12px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .accept-btn {
+      background-color: #28a745;
+    }
+
+    .accept-btn:hover {
+      background-color: #218838;
+    }
+
+    .delete-btn {
+      background-color: #dc3545;
+    }
+
+    .delete-btn:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+<body>
+
+<div class="navbar">
+  <a href="../home_pages/home-doctor.html">Home</a>
+  <a href="#">Patients</a>
+  <a href="#">Create Clinic</a>
+</div>
+
+<h1>Requests from Patients</h1>
+
+<div class="requests-container" id="requestsList"></div>
+
+<script>
+  const doctorName = localStorage.getItem("loggedInDoctor"); // لازم تكوني خزنّتي اسم الدكتور عند تسجيل الدخول
+  const doctorKey = `requests_${doctorName?.replace(/\s+/g, '_')}`;
+  const acceptedKey = `accepted_${doctorName?.replace(/\s+/g, '_')}`;
+
+  function loadRequests() {
+    const requests = JSON.parse(localStorage.getItem(doctorKey)) || [];
+    const container = document.getElementById("requestsList");
+
+    container.innerHTML = "";
+
+    if (requests.length === 0) {
+      container.innerHTML = "<p>No requests at the moment.</p>";
+      return;
+    }
+
+    requests.forEach((req, index) => {
+      const card = document.createElement("div");
+      card.className = "request-card";
+      card.innerHTML = `
+        <h3>${req.patient}</h3>
+        <p><strong>Clinic:</strong> ${req.clinic}</p>
+        <p><strong>Email:</strong> ${req.email}</p>
+        <div class="actions">
+          <button class="accept-btn" onclick="acceptRequest(${index})">Accept</button>
+          <button class="delete-btn" onclick="deleteRequest(${index})">Delete</button>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  function acceptRequest(index) {
+    let requests = JSON.parse(localStorage.getItem(doctorKey)) || [];
+    let accepted = JSON.parse(localStorage.getItem(acceptedKey)) || [];
+
+    const request = requests[index];
+    accepted.push(request);
+
+    // remove from requests
+    requests.splice(index, 1);
+    localStorage.setItem(doctorKey, JSON.stringify(requests));
+    localStorage.setItem(acceptedKey, JSON.stringify(accepted));
+    alert("Patient accepted!");
+    loadRequests();
+  }
+
+  function deleteRequest(index) {
+    let requests = JSON.parse(localStorage.getItem(doctorKey)) || [];
+    requests.splice(index, 1);
+    localStorage.setItem(doctorKey, JSON.stringify(requests));
+    alert("Request deleted.");
+    loadRequests();
+  }
+
+  window.onload = loadRequests;
+</script>
+
+</body>
+</html>

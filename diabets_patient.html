@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Data Form</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 50px;
+            background: #007BFF;
+            color: white;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        nav ul li {
+            margin: 0 20px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: 600;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="../home_pages/home-patient.html" class="active">Home</a></li>
+            <li><a href="tests.html">Tests</a></li>
+            <li><a href="tips.html">Tips</a></li>
+            <li><a href="../clinics/clinics.html">Clinics</a></li>
+            <li><a href="../about_us/about_patient.html">About us</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h2>Diabetes Data Form</h2>
+        <form>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Diabetes Status</label>
+                    <select>
+                        <option value="0">No Diabetes</option>
+                        <option value="1">Prediabetes</option>
+                        <option value="2">Diabetes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>High Blood Pressure</label>
+                    <select>
+                        <option value="0">No High BP</option>
+                        <option value="1">High BP</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>High Cholesterol</label>
+                    <select>
+                        <option value="0">No High Cholesterol</option>
+                        <option value="1">High Cholesterol</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Cholesterol Check in 5 Years</label>
+                    <select>
+                        <option value="0">No Cholesterol Check</option>
+                        <option value="1">Cholesterol Check Done</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>BMI (Body Mass Index)</label>
+                    <input type="text" placeholder="Enter BMI">
+                </div>
+                <div class="form-group">
+                    <label>Smoker</label>
+                    <select>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Stroke History</label>
+                    <select>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Heart Disease or Attack</label>
+                    <select>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Physical Activity in Last 30 Days</label>
+                    <select>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Consume Fruit Daily</label>
+                    <select>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Consume Vegetables Daily</label>
+                    <select>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Heavy Alcohol Consumption</label>
+                    <select>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Any Healthcare Coverage</label>
+                    <select>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Could Not See Doctor Due to Cost</label>
+                    <select>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>General Health</label>
+                    <select>
+                        <option value="1">Excellent</option>
+                        <option value="2">Very Good</option>
+                        <option value="3">Good</option>
+                        <option value="4">Fair</option>
+                        <option value="5">Poor</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Mental Health (Days)</label>
+                    <input type="number" min="0" max="30" placeholder="Enter days (0-30)">
+                </div>
+                <div class="form-group">
+                    <label>Physical Health (Days)</label>
+                    <input type="number" min="0" max="30" placeholder="Enter days (0-30)">
+                </div>
+                <div class="form-group">
+                    <label>Difficulty Walking</label>
+                    <select>
+                        <option value="0">No Difficulty</option>
+                        <option value="1">Yes, Difficulty</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Sex</label>
+                    <select>
+                        <option value="0">Female</option>
+                        <option value="1">Male</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Age Category</label>
+                    <select>
+                        <option value="1">18-24</option>
+                        <option value="2">25-29</option>
+                        <option value="3">30-34</option>
+                        <option value="4">35-39</option>
+                        <option value="5">40-44</option>
+                        <option value="6">45-49</option>
+                        <option value="7">50-54</option>
+                        <option value="8">55-59</option>
+                        <option value="9">60-64</option>
+                        <option value="10">65-69</option>
+                        <option value="11">70-74</option>
+                        <option value="12">75-79</option>
+                        <option value="13">80 or older</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Education Level</label>
+                    <select>
+                        <option value="1">Never attended school or only kindergarten</option>
+                        <option value="2">Grades 1-8</option>
+                        <option value="3">Grades 9-11</option>
+                        <option value="4">High school graduate</option>
+                        <option value="5">Some college or technical school</option>
+                        <option value="6">College graduate</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Income Level</label>
+                    <select>
+                        <option value="1">Less than $10,000</option>
+                        <option value="2">$10,000 - $15,000</option>
+                        <option value="3">$15,000 - $20,000</option>
+                        <option value="4">$20,000 - $25,000</option>
+                        <option value="5">Less than $35,000</option>
+                        <option value="6">$35,000 - $50,000</option>
+                        <option value="7">$50,000 - $75,000</option>
+                        <option value="8">$75,000 or more</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
